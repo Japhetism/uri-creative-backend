@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JobApplication } from './job-application.model';
 import { applicationsFixture } from './job-application.fixtures';
-import { filterApplicationByStatus, getApplicationsByMonth } from '../utils/helper.utils';
+// import { filterApplicationByStatus, getApplicationsByMonth } from '../utils/helper.utils';
 
 @Injectable()
 export class JobApplicationService {
@@ -26,12 +26,17 @@ export class JobApplicationService {
     try {
       const totalApplications = this.applications.length;
       const countByStatus = {
-        pending: filterApplicationByStatus(this.applications, "pending")?.length,
-        accepted: filterApplicationByStatus(this.applications, "accepted")?.length,
-        rejected: filterApplicationByStatus(this.applications, "rejected")?.length,
+        pending: Helper.filterApplicationByStatus(this.applications, "pending")?.length,
+        accepted: Helper.filterApplicationByStatus(this.applications, "accepted")?.length,
+        rejected: Helper.filterApplicationByStatus(this.applications, "rejected")?.length,
+        // pending: filterApplicationByStatus(this.applications, "pending")?.length,
+        // accepted: filterApplicationByStatus(this.applications, "accepted")?.length,
+        // rejected: filterApplicationByStatus(this.applications, "rejected")?.length,
       };
 
-      const countByMonth = getApplicationsByMonth(this.applications); 
+      // const countByMonth = getApplicationsByMonth(this.applications); 
+
+      const countByMonth = Helper.getApplicationsByMonth(this.applications); 
 
       return {
         message: 'successful',
